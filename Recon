@@ -1,0 +1,69 @@
+-------------------- Passive subdomain enumeration -------------------
+
+subfinder -d $domain -all -silent            
+
+https://censys.io
+
+assetfinder $domain -subs-only | grep $domains$
+
+knockpy --no-http $domain
+
+python github-subdomains.py -t $TOKEN -d $domain |
+grep -v '@' | sort -u | grep ".\$domain"
+
+
+
+------------------Active subdomain enumeration (basic)-----------------
+
+ massdns tool 
+
+# ftp > ftp.logitech.com
+awk -v host=$domain '(print $0". "host)' ~/mydnslist > massdnslist
+massdns massdnslist -r ~/toys/massdns/lists/resolvers.txt -o S -t A -q
+I awk -F"
+" 'print $1]' | sort -u
+
+
+
+
+
+
+------------------Port scanning-------------------
+
+
+naabu -rate 10000 -iL hosts -silent
+
+
+# Identify the list of services running on the target machine
+⇒ sudo nmap -sS -Pn -T4 -p- TARGET_IP
+
+Perform further information gathering on the open ports identified above
+⇒ sudo nmap -O -A -Pn -T4 -p80,443 TARGET_IP
+
+------------------------URL enumeration--------------------
+
+
+echo logitech.com | waybackurls    https://github.com/tomnomnom/waybackurls 
+
+
+echo logitech.com | gau                    https://github.com/lc/gau
+
+
+ python3 paramspider.py --domain logitech.com -o /dev/null |  
+grep ^http    https://github.com/devanshbatham/ParamSpider
+
+
+
+python3 github-endpoints.py -t STOKEN -d logitech.com   https://github.com/gwen001/github-search
+
+
+cat urls/* gf xxs| tail       github.com/tomnomnom/gf  
+
+
+
+  cat urls/* gf xxs| tail          https://github.com/1ndianl33t/Gf-Patterns
+
+
+
+-------------Google Dorking------------
+
